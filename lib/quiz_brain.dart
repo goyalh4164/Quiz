@@ -20,7 +20,7 @@ class QuizBrain {
         a: true),
 
     Question(
-        q: "In London, UK, if you happen to die in the House of Parliament, you are technically entitled to a state funeral, because the building is considered too sacred a place.",
+        q: "In London, UK, if you happen to die in the House of Parliament, you are technically entitled to a state funeral.",
         a: false),
 
     Question(q: "It is illegal to pee in the Ocean in Portugal.", a: true),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'quiz_brain.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 QuizBrain quizBrain = QuizBrain();
 void main() {
@@ -14,6 +13,9 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List<Icon> scoreKeeper = [];
+  int cq = 10;
+
+  int cs = 0;
   // List<String> questions = [];
   // List<bool> answers = [false, false, true, false];
   //This is how you can create questiona and answer club together
@@ -25,9 +27,13 @@ class _MyAppState extends State<MyApp> {
   void checkAnswer(bool userPickedAnswer) {
     bool correctAnswer = quizBrain.getCorrectAnswer();
     setState(() {
+      cs;
+      cq--;
       quizBrain.nextQuestion();
     });
+
     if (correctAnswer == userPickedAnswer) {
+      cs++;
       scoreKeeper.add(
         Icon(
           Icons.check,
@@ -60,6 +66,36 @@ class _MyAppState extends State<MyApp> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                  child: Container(
+                    color: Colors.white,
+                    width: double.infinity,
+                    height: 40,
+                    child: Center(
+                      child: Text(
+                        "Questions Left: " + "${cq}",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                  child: Container(
+                    color: Colors.white,
+                    width: double.infinity,
+                    height: 40,
+                    child: Center(
+                      child: Text(
+                        "Current Score: " + "${cs}/10",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
                 Expanded(
                   child: Container(
                     width: double.infinity,
@@ -85,13 +121,6 @@ class _MyAppState extends State<MyApp> {
                     padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
                     child: MaterialButton(
                       onPressed: () {
-                        if (quizBrain.questionNumber == 5) {
-                          Alert(
-                                  context: context,
-                                  title: "rflutter_alert",
-                                  desc: "this is a description")
-                              .show();
-                        }
                         checkAnswer(true);
                       },
                       color: Colors.green,
@@ -113,15 +142,7 @@ class _MyAppState extends State<MyApp> {
                     padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
                     child: MaterialButton(
                       onPressed: () {
-                        if (quizBrain.questionNumber == 5) {
-                          Alert(
-                                  context: context,
-                                  title: "rflutter_alert",
-                                  desc: "this is a description")
-                              .show();
-                        } else {
-                          checkAnswer(false);
-                        }
+                        checkAnswer(false);
                       },
                       color: Colors.red,
                       height: 70,
